@@ -1,0 +1,27 @@
+db:
+  image: postgres:9.4
+  volumes:
+    - ~/.docker-volumes/duse/db/:/var/lib/postgresql/data/
+  ports:
+    - "5432"
+  environment:
+    - POSTGRES_USER=duse
+    - POSTGRES_PASSWORD=password #change this
+web:
+  image: duseio/api
+  ports:
+    - "5000:5000"
+  links:
+    - db
+  environment:
+    - EMAIL=noreply@duse.io # what address do you want emails to be sent from
+    - HOST=duse.io          # required for building urls
+    - SECRET_KEY=secretkey  # for secure authentication. Keep secret!
+    - DATABASE_URL=postgres://duse:password@db/duse # adapt to change in db environment
+    #- SENTRY_DSN=only set when you want to use sentry
+    #- SSL=true             # you should be using SSL inproduction
+    #- SMTP_HOST=           # host name of the smtp server to use
+    #- SMTP_PORT=           # port of the smtp server to use
+    #- SMTP_USER=           # smtp user you want to use
+    #- SMTP_PASSWORD=       # smtp password of your user
+
