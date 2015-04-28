@@ -3,7 +3,10 @@ setup duse
 
 The easiest way to setup your own duse instance uses
 [Docker](https://www.docker.com/) and [Docker
-Compose](https://docs.docker.com/compose/) on an Ubuntu 14.04 machine.
+Compose](https://docs.docker.com/compose/) on an Ubuntu 14.04 machine. Once you
+have setup your duse api, you can configure
+[duse.rb](https://github.com/duse-io/duse.rb) to access it and you are ready to
+go.
 
 Contributing
 ------------
