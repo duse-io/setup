@@ -5,6 +5,16 @@ The easiest way to setup your own duse instance uses
 [Docker](https://www.docker.com/) and [Docker
 Compose](https://docs.docker.com/compose/) on an Ubuntu 14.04 machine.
 
+Contributing
+------------
+
+If you prefer other ways of setting duse up we're happy to add them to the
+list. If you have as ansible/salt/puppet/chef setup you want to share, we're
+also happy to add a repo for it.
+
+Feedback is always appreciated, just open an
+[issue](https://github.com/duse-io/setup/issues/new).
+
 Vagrant
 -------
 
