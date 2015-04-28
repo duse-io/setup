@@ -15,7 +15,7 @@ the vm.
 > [Virtualbox](https://www.virtualbox.org/) or equivalent
 
 Then clone this repo and simply run `vagrant up`. This automatically runs the
-[bootstrap.sh](../blob/master/bootstrap.sh) explained below.
+[bootstrap.sh](../master/bootstrap.sh) explained below.
 
 Once that's done you can directly jump to [setup](#setup).
 
@@ -29,18 +29,19 @@ Without vagrant you will simply need an Ubuntu 14.04 machine.
 
 ###Prerequisites
 
-Run the [bootstrap.sh](../blob/master/bootstrap.sh) script, which does the following:
+Run the [bootstrap.sh](../master/bootstrap.sh) script, which does the
+following:
 
 * install docker
 * install docker-compose
 * adds the vagrant user to the docker group
 * modify some configs for docker to run smooth
-* downloads the [docker-compose.yml](../blob/master/docker-compose.yml) from
-  this repository to the current directory
+* downloads the [docker-compose.yml](../master/docker-compose.yml) from this
+  repository to the current directory
 
 ###Setup
 
-The [docker-compose.yml](../blob/master/docker-compose.yml) describes the
+The [docker-compose.yml](../master/docker-compose.yml) describes the
 applications configuration. The first part describes the PostgreSQL server
 setup.
 
