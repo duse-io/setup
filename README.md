@@ -92,7 +92,40 @@ the services required to run duse. We will place this in a separate subfolder.
 
 Now you can go on to the actual [setup](#setup).
 
-###Setup
+DigitalOcean
+------------
+
+Create a docker droplet. Login as root.
+
+First make sure we're up to date
+
+	apt-get update
+	apt-get upgrade
+
+Create a user to run duse as and add it to the docker group
+
+	adduser --disabled-login duse
+	usermod -a -G docker duse
+
+And install docker-compose
+
+	curl -L https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+	chmod +x /usr/local/bin/docker-compose
+
+From now on execute commands as the `duse` user
+
+	su duse
+
+Create a directory for duse and download the `docker-compose.yml`
+
+	mkdir ~/duse
+	cd ~/duse
+	wget https://raw.githubusercontent.com/duse-io/setup/master/docker-compose.yml
+
+Now just follow [setup](#setup).
+
+Setup
+-----
 
 The [docker-compose.yml](../master/docker-compose.yml) describes the
 applications configuration. The first part describes the PostgreSQL server
