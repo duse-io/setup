@@ -29,15 +29,54 @@ Without vagrant you will simply need an Ubuntu 14.04 machine.
 
 ###Prerequisites
 
-Run the [bootstrap.sh](../master/bootstrap.sh) script, which does the
-following:
+Essentially what we need is what the [bootstrap.sh](../master/bootstrap.sh)
+script does in the Vagrant setup:
 
 * install docker
 * install docker-compose
-* adds the vagrant user to the docker group
+* add your prefered user to the docker group
 * modify some configs for docker to run smooth
 * downloads the [docker-compose.yml](../master/docker-compose.yml) from this
   repository to the current directory
+
+First let's make sure the system is up to date
+
+	sudo apt-get update
+	sudo apt-get -y upgrade
+
+And make sure you've got `wget`
+
+	sudo apt-get install wget
+
+Now we can install docker
+
+	wget -qO- https://get.docker.com/ | sudo sh
+
+And add the user you want to setup duse under to the docker group
+
+	sudo groupadd docker
+	sudo gpasswd -a ${USER} docker
+	sudo service docker restart
+
+> Info: if you don't do this, it will require you to use sudo to run docker
+> commands
+
+Now that we have docker installed, we can install docker-compose. We will need
+to run this as root
+
+	sudo su
+	curl -L https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+	exit
+
+Now the required software is installed and we can download the
+[docker-compose.yml](../master/docker-compose.yml). It describes the setup of
+the services required to run duse. We will place this in a separate subfolder.
+
+	mkdir ~/duse && cd ~/duse
+	wget https://raw.githubusercontent.com/duse-io/setup/master/docker-compose.yml
+
+Now you can go on to the actual [setup](#setup).
 
 ###Setup
 
