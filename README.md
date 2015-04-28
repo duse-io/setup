@@ -15,9 +15,13 @@ the vm.
 > [Virtualbox](https://www.virtualbox.org/) or equivalent
 
 Then clone this repo and simply run `vagrant up`. This automatically runs the
-[bootstrap.sh](../master/bootstrap.sh) explained below.
+[bootstrap.sh](../master/bootstrap.sh), which essentially executes the same
+steps as explained in [prerequisites](#prerequisites) focused on vagrant.
 
 Once that's done you can directly jump to [setup](#setup).
+
+> Hint: the docker-compose.yml mentioned in [setup](#setup) is located at
+> `~/duse/docker-compose.yml`.
 
 After having started the application you can access it from your host at
 `http://192.168.0.10:5000` or whatever port you configured it to.

@@ -24,5 +24,5 @@ sudo service docker restart
 curl -L https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
-# get the docker-compose.yml
-su -l vagrant -c "wget https://raw.githubusercontent.com/duse-io/setup/master/docker-compose.yml"
+# get the docker-compose.yml and put it in ~/duse
+su -l vagrant -c "mkdir ~/duse && cd ~/duse && wget https://raw.githubusercontent.com/duse-io/setup/master/docker-compose.yml"
