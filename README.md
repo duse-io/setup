@@ -223,3 +223,81 @@ You can check if your configurations are valid with
 Or if you are using docker-compose then it would be
 
 	docker-compose run web rake config:check
+
+Nginx
+-----
+
+Let's put duse behind nginx. First we have to install nginx
+
+	sudo apt-get install -y nginx
+
+Add a site to nginx
+
+	vim /etc/nginx/sites-available/duse.domain.tld
+
+Here's a configuration for setting duse up on a subdomain.
+
+> Info: This configuration is without SSL, we highly recommend using SSL in
+> production
+
+```
+server {
+  listen 80;
+  server_name duse.domain.tld;
+
+  location / {
+    proxy_pass              http://localhost:5000;
+    proxy_set_header        Host $host;
+    proxy_set_header        X-Real-IP $remote_addr;
+    proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_connect_timeout   150;
+    proxy_send_timeout      100;
+    proxy_read_timeout      100;
+    proxy_buffers           4 32k;
+    client_max_body_size    8m;
+    client_body_buffer_size 128k;
+
+  }
+}
+```
+
+Or on a subdomain with SSL
+
+```
+upstream duse {
+  server 127.0.0.1:8080 fail_timeout=0;
+}
+
+server {
+  listen 80;
+  return 301 https://$host$request_uri;
+}
+
+server {
+  listen 443;
+  server_name duse.domain.tld;
+
+  ssl on;
+  ssl_certificate /etc/nginx/ssl/server.crt;
+  ssl_certificate_key /etc/nginx/ssl/server.key;
+
+  location / {
+    proxy_set_header        Host $host;
+    proxy_set_header        X-Real-IP $remote_addr;
+    proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header        X-Forwarded-Proto $scheme;
+    proxy_redirect http:// https://;
+    proxy_pass              http://duse;
+  }
+}
+```
+
+Then enable the site
+
+	ln -s /etc/nginx/sites-available/duse.domain.tld /etc/nginx/sites-enabled/duse.domain.tld
+
+and reload nginx
+
+	sudo service nginx reload
+
+Done!
