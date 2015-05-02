@@ -1,7 +1,11 @@
 setup duse
 ==========
 
-The easiest way to setup your own duse instance uses
+To quickly setup an instance use heroku.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/duse-io/api)
+
+The easiest way to setup your own duse instance on your own server uses
 [Docker](https://www.docker.com/) and [Docker
 Compose](https://docs.docker.com/compose/) on an Ubuntu 14.04 machine. Once you
 have setup your duse api, you can configure
