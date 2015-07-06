@@ -1,12 +1,17 @@
+dbfiles:
+  image: 'alpine'
+  command: '/bin/true'
+  volumes:
+    - '/data/postgres:/var/lib/postgresql/data/'
 db:
   image: postgres:9.4
-  volumes:
-    - ~/.docker-volumes/duse/db/:/var/lib/postgresql/data/
+  volumes_from:
+    - dbfiles
   ports:
     - "5432"
   environment:
     - POSTGRES_USER=duse
-    - POSTGRES_PASSWORD=password #change this
+    - POSTGRES_PASSWORD=password # change this
 web:
   image: duseio/api
   ports:
